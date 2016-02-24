@@ -4,7 +4,7 @@ package edu.towson.cis.cosc603.project2.monopoly;
 /**
  * The Class Cell.
  */
-public abstract class Cell implements IOwnable {
+public abstract class Cell {
 	
 	/** The name. */
 	private String name;
@@ -24,10 +24,11 @@ public abstract class Cell implements IOwnable {
 		return name;
 	}
 
-	/* (non-Javadoc)
-	 * @see edu.towson.cis.cosc603.project2.monopoly.IOwnable#getTheOwner()
+	/**
+	 * Gets the theOwner.
+	 *
+	 * @return the theOwner
 	 */
-	@Override
 	public Player getTheOwner() {
 		return theOwner;
 	}
@@ -55,10 +56,11 @@ public abstract class Cell implements IOwnable {
 		this.name = name;
 	}
 
-	/* (non-Javadoc)
-	 * @see edu.towson.cis.cosc603.project2.monopoly.IOwnable#setTheOwner(edu.towson.cis.cosc603.project2.monopoly.Player)
+	/**
+	 * Sets the theOwner.
+	 *
+	 * @param theOwner the new theOwner
 	 */
-	@Override
 	public void setTheOwner(Player owner) {
 		this.theOwner = owner;
 	}
@@ -70,18 +72,20 @@ public abstract class Cell implements IOwnable {
         return name;
     }
 
-	/* (non-Javadoc)
-	 * @see edu.towson.cis.cosc603.project2.monopoly.IOwnable#isAvailable()
+	/**
+	 * Checks if is available.
+	 *
+	 * @return true, if is available
 	 */
-	@Override
 	public boolean isAvailable() {
 		return available;
 	}
 
-	/* (non-Javadoc)
-	 * @see edu.towson.cis.cosc603.project2.monopoly.IOwnable#setAvailable(boolean)
+	/**
+	 * Sets the available.
+	 *
+	 * @param available the new available
 	 */
-	@Override
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
