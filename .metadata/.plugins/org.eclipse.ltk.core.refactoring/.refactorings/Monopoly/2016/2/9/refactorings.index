@@ -1,2 +1,3 @@
 1456319017875	Rename field 'owner'
 1456323809768	Extract interface 'IOwnable'
+1456515174329	Extract method 'calculateMonopoliesRent'
