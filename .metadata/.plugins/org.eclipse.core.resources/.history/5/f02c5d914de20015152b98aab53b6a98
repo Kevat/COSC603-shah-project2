@@ -18,7 +18,6 @@ public class GoCell extends Cell {
 	 * @see edu.towson.cis.cosc442.project1.monopoly.Cell#playAction()
 	 */
 	public boolean playAction() {
-		return true;
 	}
 	
 	/* (non-Javadoc)

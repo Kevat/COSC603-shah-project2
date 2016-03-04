@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Change method &apos;public void edu.towson.cis.cosc603.project2.monopoly.Cell.playAction()&apos; to &apos;public boolean playAction()&apos;&#x0D;&#x0A;- Original project: &apos;Monopoly&apos;&#x0D;&#x0A;- Original element: &apos;edu.towson.cis.cosc603.project2.monopoly.Cell.playAction()&apos;&#x0D;&#x0A;- New return type: &apos;boolean&apos;" delegate="false" deprecate="true" description="Change method &apos;playAction&apos;" flags="589830" id="org.eclipse.jdt.ui.change.method.signature" input="/src&lt;edu.towson.cis.cosc603.project2.monopoly{Cell.java[Cell~playAction" name="playAction" return="boolean" stamp="1457125775891" version="1.0"/>
+</session>

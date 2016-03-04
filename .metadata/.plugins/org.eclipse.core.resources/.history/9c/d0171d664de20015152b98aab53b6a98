@@ -43,9 +43,8 @@ public abstract class Cell implements IOwnable {
 
 	/**
 	 * Play action.
-	 * @return TODO
 	 */
-	public abstract boolean playAction();
+	public abstract void playAction();
 
 	/**
 	 * Sets the name.
