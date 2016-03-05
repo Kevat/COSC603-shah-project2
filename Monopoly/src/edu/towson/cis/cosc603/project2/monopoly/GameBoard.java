@@ -35,11 +35,7 @@ public class GameBoard {
      * @param card the card
      */
     public void addCard(Card card) {
-        if(card.getCardType() == Card.TYPE_CC) {
-            communityChestCards.add(card);
-        } else {
-            chanceCards.add(card);
-        }
+        card.addCard(this);
     }
 	
 	/**
@@ -181,4 +177,57 @@ public class GameBoard {
     public void removeCards() {
         communityChestCards.clear();
     }
+
+	/**
+	 * Move player.
+	 * @param player  the player
+	 * @param diceValue  the dice value
+	 * @param gui
+	 * @param gameMaster
+	 */
+	public void movePlayer(Player player, int diceValue, MonopolyGUI gui, GameMaster gameMaster) {
+		gui(player, diceValue, gui, gameMaster);
+		gameMaster.updateGUI();
+	}
+
+	private void gui(Player player, int diceValue, MonopolyGUI gui, GameMaster gameMaster) {
+		Cell currentPosition = player.getPosition();
+		int positionIndex = queryCellIndex(currentPosition.getName());
+		int newIndex = (positionIndex + diceValue) % getCellNumber();
+		if (newIndex <= positionIndex || diceValue > getCellNumber()) {
+			player.setMoney(player.getMoney() + 200);
+		}
+		player.setPosition(getCell(newIndex));
+		gui.movePlayer(gameMaster.getPlayerIndex(player), positionIndex, newIndex);
+		gameMaster.playerMoved(player);
+	}
+
+	/**
+	 * Btn draw card clicked.
+	 * @param gui
+	 * @param gameMaster
+	 * @return  the card
+	 */
+	public Card btnDrawCardClicked(MonopolyGUI gui, GameMaster gameMaster) {
+		gui.setDrawCardEnabled(false);
+		CardCell cell = (CardCell) gameMaster.getCurrentPlayer().getPosition();
+		Card card = null;
+		if (cell.getType() == Card.TYPE_CC) {
+			card = drawCCCard();
+			card.applyAction();
+		} else {
+			card = drawChanceCard();
+			card.applyAction();
+		}
+		gui.setEndTurnEnabled(true);
+		return card;
+	}
+
+	public ArrayList<Card> getCommunityChestCards() {
+		return communityChestCards;
+	}
+
+	public ArrayList<Card> getChanceCards() {
+		return chanceCards;
+	}
 }

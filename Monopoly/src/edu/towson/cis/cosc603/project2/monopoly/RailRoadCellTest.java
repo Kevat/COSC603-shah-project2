@@ -15,9 +15,13 @@ public class RailRoadCellTest extends TestCase {
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	protected void setUp() {
+		gameMaster();
+		gameMaster.setNumberOfPlayers(2);
+	}
+
+	private void gameMaster() {
 		gameMaster = GameMaster.instance();
 		gameMaster.setGameBoard(new GameBoardRailRoad());
-		gameMaster.setNumberOfPlayers(2);
 		gameMaster.reset();
 		gameMaster.setGUI(new MockGUI());
 	}

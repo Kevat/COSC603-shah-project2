@@ -49,13 +49,27 @@ public class UtilityCell extends Cell {
 	public boolean playAction() {
 		Player currentPlayer = null;
 		if(!isAvailable()) {
-			currentPlayer = GameMaster.instance().getCurrentPlayer();
-			if(theOwner != currentPlayer) {
-				GameMaster.instance().utilRollDice();
-				int diceRoll = GameMaster.instance().getUtilDiceRoll();
-				currentPlayer.payRentTo(theOwner, getRent(diceRoll));
-			}
+			currentPlayer(currentPlayer);
 		}
 		return true;
+	}
+
+	private void currentPlayer(Player currentPlayer) {
+		currentPlayer = GameMaster.instance().getCurrentPlayer();
+		if (theOwner != currentPlayer) {
+			GameMaster.instance().utilRollDice();
+			int diceRoll = GameMaster.instance().getUtilDiceRoll();
+			currentPlayer.payRentTo(theOwner, getRent(diceRoll));
+		}
+	}
+
+	public void playerMoved(Player player, int playerIndex, GameMaster gameMaster) {
+		if (this.isAvailable()) {
+			int price = this.getPrice();
+			if (price <= player.getMoney() && price > 0) {
+				gameMaster.getGUI().enablePurchaseBtn(playerIndex);
+			}
+		}
+		gameMaster.getGUI().enableEndTurnBtn(playerIndex);
 	}
 }

@@ -17,15 +17,19 @@ public class GameMasterTest extends TestCase {
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	protected void setUp() throws Exception {
-		gameMaster = GameMaster.instance();
-		gameMaster.setGameBoard(new GameBoardFull());
+		gameMaster();
 		gameMaster.setNumberOfPlayers(2);
         gameMaster.getPlayer(0).setName("Player 1");
         gameMaster.getPlayer(1).setName("Player 2");
+	}
+
+	private void gameMaster() {
+		gameMaster = GameMaster.instance();
+		gameMaster.setGameBoard(new GameBoardFull());
 		gameMaster.reset();
 		gameMaster.setTestMode(true);
-        gameMaster.setGUI(new MockGUI());
-        gameMaster.startGame();
+		gameMaster.setGUI(new MockGUI());
+		gameMaster.startGame();
 	}
 	
 	/**
@@ -94,17 +98,22 @@ public class GameMasterTest extends TestCase {
 	 * Test button get out of jail clicked.
 	 */
 	public void testButtonGetOutOfJailClicked() {
-		MonopolyGUI gui = gameMaster.getGUI();
+		MonopolyGUI gui = gui();
 		gameMaster.movePlayer(0,30);
-		gameMaster.btnEndTurnClicked();
 		assertEquals("Jail", gameMaster.getPlayer(0).getPosition().getName());
 		gameMaster.movePlayer(1,2);
-		gameMaster.btnEndTurnClicked();
-		assertTrue(gui.isGetOutOfJailButtonEnabled());
 		assertTrue(gameMaster.getPlayer(0).isInJail());
-		gameMaster.btnGetOutOfJailClicked();
 		assertFalse(gameMaster.getPlayer(0).isInJail());
 		assertEquals(1450,gameMaster.getPlayer(0).getMoney());
+	}
+
+	private MonopolyGUI gui() {
+		MonopolyGUI gui = gameMaster.getGUI();
+		gameMaster.btnEndTurnClicked();
+		gameMaster.btnEndTurnClicked();
+		assertTrue(gui.isGetOutOfJailButtonEnabled());
+		gameMaster.btnGetOutOfJailClicked();
+		return gui;
 	}
 	
 	/**

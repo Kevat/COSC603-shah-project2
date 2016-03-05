@@ -73,18 +73,7 @@ public class GameMaster {
      * @return the card
      */
     public Card btnDrawCardClicked() {
-        gui.setDrawCardEnabled(false);
-        CardCell cell = (CardCell)getCurrentPlayer().getPosition();
-        Card card = null;
-        if(cell.getType() == Card.TYPE_CC) {
-            card = getGameBoard().drawCCCard();
-            card.applyAction();
-        } else {
-            card = getGameBoard().drawChanceCard();
-            card.applyAction();
-        }
-        gui.setEndTurnEnabled(true);
-        return card;
+        return gameBoard.btnDrawCardClicked(gui, this);
     }
 
     /**
@@ -114,21 +103,24 @@ public class GameMaster {
      */
     public void btnGetOutOfJailClicked() {
 		getCurrentPlayer().getOutOfJail();
-		if(getCurrentPlayer().isBankrupt()) {
+		gui();
+    }
+
+	private void gui() {
+		if (getCurrentPlayer().isBankrupt()) {
 			gui.setBuyHouseEnabled(false);
 			gui.setDrawCardEnabled(false);
 			gui.setEndTurnEnabled(false);
 			gui.setGetOutOfJailEnabled(false);
 			gui.setPurchasePropertyEnabled(false);
 			gui.setRollDiceEnabled(false);
-			gui.setTradeEnabled(getCurrentPlayerIndex(),false);
-		}
-		else {
+			gui.setTradeEnabled(getCurrentPlayerIndex(), false);
+		} else {
 			gui.setRollDiceEnabled(true);
 			gui.setBuyHouseEnabled(getCurrentPlayer().canBuyHouse());
 			gui.setGetOutOfJailEnabled(getCurrentPlayer().isInJail());
 		}
-    }
+	}
 
     /**
      * Btn purchase property clicked.
@@ -155,7 +147,7 @@ public class GameMaster {
 					.append(" and ")
 					.append(rolls[1]);
 			gui.showMessage(msg.toString());
-			movePlayer(player, rolls[0] + rolls[1]);
+			gameBoard.movePlayer(player, rolls[0] + rolls[1], gui, this);
 			gui.setBuyHouseEnabled(false);
 		}
     }
@@ -169,7 +161,7 @@ public class GameMaster {
         if(deal != null) {
             RespondDialog rDialog = gui.openRespondDialog(deal);
             if(rDialog.getResponse()) {
-                completeTrade(deal);
+                deal.completeTrade(gameBoard, this);
                 updateGUI();
             }
         }
@@ -181,10 +173,7 @@ public class GameMaster {
      * @param deal the deal
      */
     public void completeTrade(TradeDeal deal) {
-        Player seller = getPlayer(deal.getPlayerIndex());
-        Cell property = gameBoard.queryCell(deal.getPropertyName());
-        seller.sellProperty(property, deal.getAmount());
-        getCurrentPlayer().buyProperty(property, deal.getAmount());
+        deal.completeTrade(gameBoard, this);
     }
 
     /**
@@ -329,7 +318,7 @@ public class GameMaster {
 	 */
 	public void movePlayer(int playerIndex, int diceValue) {
 		Player player = (Player)players.get(playerIndex);
-		movePlayer(player, diceValue);
+		gameBoard.movePlayer(player, diceValue, gui, this);
 	}
 	
 	/**
@@ -339,16 +328,7 @@ public class GameMaster {
 	 * @param diceValue the dice value
 	 */
 	public void movePlayer(Player player, int diceValue) {
-		Cell currentPosition = player.getPosition();
-		int positionIndex = gameBoard.queryCellIndex(currentPosition.getName());
-		int newIndex = (positionIndex+diceValue)%gameBoard.getCellNumber();
-		if(newIndex <= positionIndex || diceValue > gameBoard.getCellNumber()) {
-			player.setMoney(player.getMoney() + 200);
-		}
-		player.setPosition(gameBoard.getCell(newIndex));
-		gui.movePlayer(getPlayerIndex(player), positionIndex, newIndex);
-		playerMoved(player);
-		updateGUI();
+		gameBoard.movePlayer(player, diceValue, gui, this);
 	}
 
 	/**
@@ -359,17 +339,7 @@ public class GameMaster {
 	public void playerMoved(Player player) {
 		Cell cell = player.getPosition();
 		int playerIndex = getPlayerIndex(player);
-		if(cell instanceof CardCell) {
-		    gui.setDrawCardEnabled(true);
-		} else{
-			if(cell.isAvailable()) {
-				int price = cell.getPrice();
-				if(price <= player.getMoney() && price > 0) {
-					gui.enablePurchaseBtn(playerIndex);
-				}
-			}	
-			gui.enableEndTurnBtn(playerIndex);
-		}
+		cell.playerMoved(player, playerIndex, this);
         gui.setTradeEnabled(turn, false);
 	}
 

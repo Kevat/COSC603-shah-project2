@@ -34,4 +34,8 @@ public class CardCell extends Cell {
     public int getType() {
         return type;
     }
+
+	public void playerMoved(Player player, int playerIndex, GameMaster gameMaster) {
+		gameMaster.getGUI().setDrawCardEnabled(true);
+	}
 }
