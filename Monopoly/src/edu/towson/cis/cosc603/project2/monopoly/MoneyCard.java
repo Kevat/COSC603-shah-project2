@@ -50,6 +50,9 @@ public class MoneyCard extends Card {
         return label;
     }
 
+	/* (non-Javadoc)
+	 * @see edu.towson.cis.cosc603.project2.monopoly.Card#addCard(edu.towson.cis.cosc603.project2.monopoly.GameBoard)
+	 */
 	public void addCard(GameBoard gameBoard) {
 		gameBoard.getChanceCards().add(this);
 	}

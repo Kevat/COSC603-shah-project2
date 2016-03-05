@@ -106,6 +106,9 @@ public class GameMaster {
 		gui();
     }
 
+	/**
+	 * Gui.
+	 */
 	private void gui() {
 		if (getCurrentPlayer().isBankrupt()) {
 			gui.setBuyHouseEnabled(false);

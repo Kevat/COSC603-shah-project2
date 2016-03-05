@@ -87,8 +87,9 @@ public class TradeDeal {
 
 	/**
 	 * Complete trade.
-	 * @param gameBoard
-	 * @param gameMaster
+	 *
+	 * @param gameBoard the game board
+	 * @param gameMaster the game master
 	 */
 	public void completeTrade(GameBoard gameBoard, GameMaster gameMaster) {
 		Player seller = gameMaster.getPlayer(getPlayerIndex());

@@ -20,6 +20,9 @@ public class PropertyCellTest extends TestCase {
 		gameMaster.setNumberOfPlayers(2);
 	}
 
+	/**
+	 * Game master.
+	 */
 	private void gameMaster() {
 		gameMaster = GameMaster.instance();
 		gameMaster.setGameBoard(new SimpleGameBoard());
@@ -38,6 +41,11 @@ public class PropertyCellTest extends TestCase {
 		gameMaster.movePlayer(1, cellIndex);
 	}
 
+	/**
+	 * Cell.
+	 *
+	 * @return the property cell
+	 */
 	private PropertyCell cell() {
 		PropertyCell cell = (PropertyCell) gameMaster.getGameBoard().queryCell("Blue 3");
 		gameMaster.switchTurn();

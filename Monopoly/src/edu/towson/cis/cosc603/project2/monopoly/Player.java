@@ -182,6 +182,7 @@ public class Player {
 	/**
 	 * Gets the out of jail.
 	 *
+	 * @return the out of jail
 	 */
 	public void getOutOfJail() {
 		money -= JailCell.BAIL;
@@ -436,9 +437,10 @@ public class Player {
 
 	/**
 	 * Display info.
-	 * @param lblName
-	 * @param lblMoney
-	 * @param txtProperty
+	 *
+	 * @param lblName the lbl name
+	 * @param lblMoney the lbl money
+	 * @param txtProperty the txt property
 	 */
 	public void displayInfo(JLabel lblName, JLabel lblMoney, JTextArea txtProperty) {
 		lblName.setText(getName());

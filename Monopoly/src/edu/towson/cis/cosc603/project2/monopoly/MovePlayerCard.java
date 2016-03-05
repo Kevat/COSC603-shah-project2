@@ -58,6 +58,9 @@ public class MovePlayerCard extends Card {
         return "Go to " + destination;
     }
 
+	/* (non-Javadoc)
+	 * @see edu.towson.cis.cosc603.project2.monopoly.Card#addCard(edu.towson.cis.cosc603.project2.monopoly.GameBoard)
+	 */
 	public void addCard(GameBoard gameBoard) {
 		gameBoard.getCommunityChestCards().add(this);
 	}

@@ -19,6 +19,9 @@ public class RailRoadCellTest extends TestCase {
 		gameMaster.setNumberOfPlayers(2);
 	}
 
+	/**
+	 * Game master.
+	 */
 	private void gameMaster() {
 		gameMaster = GameMaster.instance();
 		gameMaster.setGameBoard(new GameBoardRailRoad());

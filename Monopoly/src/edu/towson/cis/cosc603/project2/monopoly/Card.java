@@ -31,5 +31,10 @@ public abstract class Card {
      */
     public abstract int getCardType();
 
+	/**
+	 * Adds the card.
+	 *
+	 * @param gameBoard the game board
+	 */
 	public abstract void addCard(GameBoard gameBoard);
 }

@@ -23,6 +23,9 @@ public class GameMasterTest extends TestCase {
         gameMaster.getPlayer(1).setName("Player 2");
 	}
 
+	/**
+	 * Game master.
+	 */
 	private void gameMaster() {
 		gameMaster = GameMaster.instance();
 		gameMaster.setGameBoard(new GameBoardFull());
@@ -107,6 +110,11 @@ public class GameMasterTest extends TestCase {
 		assertEquals(1450,gameMaster.getPlayer(0).getMoney());
 	}
 
+	/**
+	 * Gui.
+	 *
+	 * @return the monopoly gui
+	 */
 	private MonopolyGUI gui() {
 		MonopolyGUI gui = gameMaster.getGUI();
 		gameMaster.btnEndTurnClicked();

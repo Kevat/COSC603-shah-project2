@@ -27,6 +27,11 @@ public class TradeDealTest extends TestCase {
 		GameMaster.instance().getPlayer(0);
     }
 
+	/**
+	 * Deal.
+	 *
+	 * @return the trade deal
+	 */
 	private TradeDeal deal() {
 		TradeDeal deal = new TradeDeal();
 		deal.setAmount(200);

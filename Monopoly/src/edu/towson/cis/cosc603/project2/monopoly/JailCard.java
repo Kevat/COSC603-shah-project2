@@ -43,6 +43,9 @@ public class JailCard extends Card {
         		" $200 when passing the GO cell";
     }
 
+	/* (non-Javadoc)
+	 * @see edu.towson.cis.cosc603.project2.monopoly.Card#addCard(edu.towson.cis.cosc603.project2.monopoly.GameBoard)
+	 */
 	public void addCard(GameBoard gameBoard) {
 		gameBoard.getChanceCards().add(this);
 	}

@@ -180,16 +180,25 @@ public class GameBoard {
 
 	/**
 	 * Move player.
+	 *
 	 * @param player  the player
 	 * @param diceValue  the dice value
-	 * @param gui
-	 * @param gameMaster
+	 * @param gui the gui
+	 * @param gameMaster the game master
 	 */
 	public void movePlayer(Player player, int diceValue, MonopolyGUI gui, GameMaster gameMaster) {
 		gui(player, diceValue, gui, gameMaster);
 		gameMaster.updateGUI();
 	}
 
+	/**
+	 * Gui.
+	 *
+	 * @param player the player
+	 * @param diceValue the dice value
+	 * @param gui the gui
+	 * @param gameMaster the game master
+	 */
 	private void gui(Player player, int diceValue, MonopolyGUI gui, GameMaster gameMaster) {
 		Cell currentPosition = player.getPosition();
 		int positionIndex = queryCellIndex(currentPosition.getName());
@@ -204,8 +213,9 @@ public class GameBoard {
 
 	/**
 	 * Btn draw card clicked.
-	 * @param gui
-	 * @param gameMaster
+	 *
+	 * @param gui the gui
+	 * @param gameMaster the game master
 	 * @return  the card
 	 */
 	public Card btnDrawCardClicked(MonopolyGUI gui, GameMaster gameMaster) {
@@ -223,10 +233,20 @@ public class GameBoard {
 		return card;
 	}
 
+	/**
+	 * Gets the community chest cards.
+	 *
+	 * @return the community chest cards
+	 */
 	public ArrayList<Card> getCommunityChestCards() {
 		return communityChestCards;
 	}
 
+	/**
+	 * Gets the chance cards.
+	 *
+	 * @return the chance cards
+	 */
 	public ArrayList<Card> getChanceCards() {
 		return chanceCards;
 	}
